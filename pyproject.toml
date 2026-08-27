@@ -5,8 +5,10 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "sphinxcontrib-webmcp"
 version = "0.1.0"
-description = "Theme-independent WebMCP tools for Sphinx documentation sites"
+description = "Theme-independent WebMCP tools for Sphinx documentation sites: search, navigation, and optionally docindex GraphRAG search"
 readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
 requires-python = ">=3.11"
 dependencies = [
   "sphinx>=9.1.0",
