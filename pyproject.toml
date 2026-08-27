@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sphinxcontrib-webmcp"
+version = "0.1.0"
+description = "Theme-independent WebMCP tools for Sphinx documentation sites"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "sphinx>=9.1.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["sphinxcontrib.webmcp*"]
+namespaces = true
+
+[tool.setuptools.package-data]
+"sphinxcontrib.webmcp" = ["static/*.js"]
