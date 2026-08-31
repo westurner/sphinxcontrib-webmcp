@@ -115,6 +115,10 @@
 
   function search(manifest, query, mode) {
     var searchConfig = manifest.search || {};
+    mode = mode || searchConfig.mode || "native";
+    if (mode === "auto") {
+      mode = searchConfig.docindex && searchConfig.docindex.enabled ? "docindex" : "native";
+    }
     if (mode === "native") {
       var nativePage = absoluteURL(manifest.artifacts.search_page || "search.html");
       nativePage.searchParams.set("q", query);

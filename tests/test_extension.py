@@ -3,7 +3,6 @@ from pathlib import Path
 from types import SimpleNamespace
 
 from docutils import nodes
-
 from sphinxcontrib.webmcp.extension import (
     DEFAULT_CONFIG,
     _build_manifest,
@@ -15,7 +14,6 @@ from sphinxcontrib.webmcp.extension import (
     normalize_config,
     setup,
 )
-
 
 STATIC_SCRIPT = (
     Path(__file__).parents[1]
@@ -51,6 +49,7 @@ def test_normalize_config_merges_nested_values_without_mutating_defaults():
     )
 
     assert config["search"]["native"] is True
+    assert config["search"]["mode"] == "native"
     assert config["search"]["docindex"]["enabled"] is True
     assert config["search"]["docindex"]["meilisearch"]["url"] == "https://search.test"
     assert DEFAULT_CONFIG["search"]["docindex"].get("enabled") is None
@@ -79,6 +78,12 @@ def test_public_search_config_keeps_public_fields_and_drops_private_key():
     assert config["docindex"]["index"] == "docs"
     assert config["docindex"]["meilisearch"]["public_api_key"] == "public"
     assert "api_key" not in config["docindex"]["meilisearch"]
+
+
+def test_public_search_config_preserves_auto_mode():
+    config = _public_search_config({"search": {"mode": "auto"}})
+
+    assert config["mode"] == "auto"
 
 
 def test_doctree_summary_reports_nested_heading_levels_and_ids():

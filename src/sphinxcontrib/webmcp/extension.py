@@ -15,6 +15,7 @@ DEFAULT_CONFIG: dict[str, Any] = {
     "exposed_to": [],
     "search": {
         "native": True,
+        "mode": "native",
         "docindex": {
             "index": "all",
             "oxirs": {"enabled": False, "url": ""},
@@ -83,6 +84,7 @@ def _public_search_config(config: dict[str, Any]) -> dict[str, Any]:
             if isinstance(search, dict)
             else True
         },
+        "mode": search.get("mode", "native") if isinstance(search, dict) else "native",
         "docindex": {
             "enabled": bool(docindex.get("enabled", False)),
             "index": docindex.get("index", "all"),
